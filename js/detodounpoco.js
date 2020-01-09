@@ -22,8 +22,10 @@
 
     let parrafoInfoDia;
     let parrafoInfoHora;
+    let dia;
 
     let init = () => {
+        dia = new Date();
         parrafoInfoDia = document.getElementById("info");
         parrafoInfoHora = document.getElementById("infoHora");
         document.getElementById("informa").addEventListener("click", informa);
@@ -31,41 +33,43 @@
     }
 
     let informa = () => {
-        a = new Date();
-        switch (a.getDay()) {
+        let msg;
+        switch (dia.getDay()) {
             case 1:
-                parrafoInfoDia.innerHTML = "Lunes";
+                msg = "Lunes";
                 break;
             case 2:
-                parrafoInfoDia.innerHTML = "Martes";
+                msg = "Martes";
                 break;
             case 3:
-                parrafoInfoDia.innerHTML = "Miércoles";
+                msg = "Miércoles";
                 break;
             case 4:
-                parrafoInfoDia.innerHTML = "Jueves";
+                msg = "Jueves";
                 break;
             case 5:
-                parrafoInfoDia.innerHTML = "Viernes";
+                msg = "Viernes";
                 break;
             case 6:
-                parrafoInfoDia.innerHTML = "Sábado";
+                msg = "Sábado";
                 break;
             case 7:
-                parrafoInfoDia.innerHTML = "Domingo";
+                msg = "Domingo";
                 break;
             default:
                 break;
         }
 
-        if (a.getHours()>18) {
-            parrafoInfoHora.innerHTML = `Son las ${a.getHours()}:${a.getMinutes()}. Ya es hora de que dejes de trabajar. Hay que conciliar la vida 
+        parrafoInfoDia.innerHTML = msg;
+
+        if (dia.getHours()>18) {
+            parrafoInfoHora.innerHTML = `Son las ${dia.getHours()}:${dia.getMinutes()}. Ya es hora de que dejes de trabajar. Hay que conciliar la vida 
             laboral con la familiar`;
-        } else if(a.getHours()<8) {
-            parrafoInfoHora.innerHTML = `Son las ${a.getHours()}:${a.getMinutes()}. Ya es hora de que comiences a trabajar. Hay que levantar el 
+        } else if(dia.getHours()<8) {
+            parrafoInfoHora.innerHTML = `Son las ${dia.getHours()}:${dia.getMinutes()}. Ya es hora de que comiences a trabajar. Hay que levantar el 
             país.`;
         }else{
-            parrafoInfoHora.innerHTML = `Son las ${a.getHours()}:${a.getMinutes()}. Pronto llegan las vacaciones. Aguanta.`;
+            parrafoInfoHora.innerHTML = `Son las ${dia.getHours()}:${dia.getMinutes()}. Pronto llegan las vacaciones. Aguanta.`;
         }
        
     }
