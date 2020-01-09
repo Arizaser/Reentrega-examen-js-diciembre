@@ -7,8 +7,6 @@
  * 2. Se borrará la información del empleado en los controles.
  */
 
-{
-
     Empleado = function (nombre, fechaNac, dni) {
         this.nombre = nombre;
         this.fechaNac = fechaNac;
@@ -43,5 +41,3 @@
         </html>`);
         ventana.document.close();
     }
-
-}

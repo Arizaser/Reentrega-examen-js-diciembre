@@ -17,83 +17,37 @@
  * • No contendrá nada de la capa de presentación, ni duplicación de código.
  */
 
-{
-    let inputNombre;
-    let errorNombre;
-    let inputFecha
-    let errorFecha;
-    let inputDni;
-    let errorDni;
-    let errorCrear;
-
-    let init = () => {
-        errorNombre = document.getElementById("errorNombre");
-        errorFecha = document.getElementById("errorFecha");
-        errorDni = document.getElementById("errorDni");
-
-        inputNombre = document.getElementById("nombre")
-        inputNombre.addEventListener("blur", validarNombre);
-
-        inputFecha = document.getElementById("fecha")
-        inputFecha.addEventListener("blur", validarFecha);
-
-        inputDni = document.getElementById("dni")
-        inputDni.addEventListener("blur", validarDni);
-
-        errorCrear = document.getElementById("errorCrear");
-
-        document.getElementById("crearEmpleado").addEventListener("click", crearEmpleado);
-    }
-
-    let validarNombre = () => {
-        if (/(^[A-Z]{1}[a-zñáéíóú])/.test(inputNombre.value)) {
-            errorNombre.className = "correcto";
-            errorNombre.innerHTML = "Es correcto";
-        }else{
-            errorNombre.className = "error";
-            errorNombre.innerHTML = "Es incorrecto";
+let Validar = {
+    validarNombre: function (nombre) {
+        if (/^[A-Za-zñÑáéíóúÁÉÍÓÚ]+[ ][A-Za-zñÑáéíóúÁÉÍÓÚ]+[ ]?[A-Za-zñÑáéíóúÁÉÍÓÚ]+$/.test(nombre)) {
+            return "";
+        } else {
+            return "Es incorrecto";
         }
-    }
-
-    let validarFecha = () => {
-        if (/^([0-9]{2})-([0-9]{2})-([0-9]{4})$/.test(inputFecha.value)) {
-            errorFecha.className = "correcto";
-            errorFecha.innerHTML = "Es correcto";
-        }else{
-            errorFecha.className = "error";
-            errorFecha.innerHTML = "Es incorrecto";
+    },
+    validarFecha: function (fecha) {
+        if (/^([0-2][0-9]|3[0-1])[/-](0[0-9]|1[0-2])[/-]\d{4}$/.test(fecha)) {
+            return "";
+        } else {
+            return "Es incorrecto";
         }
-    }
-
-    let validarDni = () => {
+    },
+    validarDni: function (dni) {
         const regex = /^([0-9]{8})[- ]?([A-Za-z]{1})$/;
-        let letrasDni="TRWAGMYFPDXBNJZSQVHLCKET";
-        if (regex.test(inputDni.value)) {
-            let numero = regex.exec(inputDni.value)[1];
-            let letra = (regex.exec(inputDni.value)[2]).toUpperCase();
-            if (letra == letrasDni[numero%23]) {
-                errorDni.className = "correcto";
-                errorDni.innerHTML = "Es correcto";
-            }else{
-                errorDni.className = "error";
-                errorDni.innerHTML = "Es incorrecto";
+        let letrasDni = "TRWAGMYFPDXBNJZSQVHLCKET";
+        let executable = regex.exec(dni);
+        if (regex.test(dni)) {
+            let numero = executable[1];
+            let letra = (executable[2]).toUpperCase();
+            if (letra == letrasDni[numero % 23]) {
+                return "";
+            } else {
+                return "Es incorrecto";
             }
-            
-        }else{
-            errorDni.className = "error";
-            errorDni.innerHTML = "Es incorrecto";
+        } else {
+            return "Es incorrecto";
         }
     }
-
-    let crearEmpleado = () => {
-        if (/(^[A-Z]{1}[a-zñáéíóú])/.test(inputNombre.value) && /([0-9]{2})-([0-9]{2})-([0-9]{4})/.test(inputFecha.value)) {
-            let empleado = new Empleado(inputNombre.value, inputFecha.value, inputDni.value);
-            errorCrear.innerHTML = "";
-        }else{
-            errorCrear.className = "error";
-            errorCrear.innerHTML = "No se puede crear el empleado porque hay datos erróneos.";
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
 }
+
+
