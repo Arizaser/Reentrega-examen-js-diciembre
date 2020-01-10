@@ -28,20 +28,21 @@
 
     document.addEventListener("DOMContentLoaded", init);
 
-    let validarDni = () =>{
-        errorDni.innerHTML = Validar.validarDni(inputDni.value);
+    let validarDni = () => {
+        return errorDni.innerHTML = Validar.validarDni(inputDni.value);
     }
-    
+
     let validarNombre = () => {
-        errorNombre.innerHTML = Validar.validarNombre(inputNombre.value);
+        return errorNombre.innerHTML = Validar.validarNombre(inputNombre.value);
     }
-    
-    let validarFecha = () =>{
-        errorFecha.innerHTML = Validar.validarFecha(inputFecha.value);
+
+    let validarFecha = () => {
+        return errorFecha.innerHTML = Validar.validarFecha(inputFecha.value);
     }
-    
+
     let crearEmpleado = () => {
-        if (/^[A-Za-zñÑáéíóúÁÉÍÓÚ]+[ ][A-Za-zñÑáéíóúÁÉÍÓÚ]+[ ]?[A-Za-zñÑáéíóúÁÉÍÓÚ]+$/.test(inputNombre.value) && /^([0-2][0-9]|3[0-1])[/-](0[0-9]|1[0-2])[/-]\d{4}$/.test(inputFecha.value)) {
+        let cadenaError = validarDni() + validarNombre() + validarFecha();
+        if (cadenaError.length == 0) {
             let empleado = new Empleado(inputNombre.value, inputFecha.value, inputDni.value);
             errorCrear.innerHTML = "";
         } else {

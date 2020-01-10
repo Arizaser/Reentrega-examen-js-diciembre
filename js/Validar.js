@@ -19,17 +19,17 @@
 
 let Validar = {
     validarNombre: function (nombre) {
-        if (/^[A-Za-zñÑáéíóúÁÉÍÓÚ]+[ ][A-Za-zñÑáéíóúÁÉÍÓÚ]+[ ]?[A-Za-zñÑáéíóúÁÉÍÓÚ]+$/.test(nombre)) {
+        if (/^[A-Z][A-Za-zñÑáéíóúÁÉÍÓÚ]+[ ][A-Za-zñÑáéíóúÁÉÍÓÚ]+[ ]?[A-Za-zñÑáéíóúÁÉÍÓÚ]+$/.test(nombre)) {
             return "";
         } else {
-            return "Es incorrecto";
+            return "Introduzca un formato válido (Formato: primera letra del nombre mayúscula y apellido)";
         }
     },
     validarFecha: function (fecha) {
         if (/^([0-2][0-9]|3[0-1])[/-](0[0-9]|1[0-2])[/-]\d{4}$/.test(fecha)) {
             return "";
         } else {
-            return "Es incorrecto";
+            return "Introduzca una fecha válida (Fórmato: dd/mm/aaaa o dd-mm-aaaa)";
         }
     },
     validarDni: function (dni) {
@@ -42,10 +42,10 @@ let Validar = {
             if (letra == letrasDni[numero % 23]) {
                 return "";
             } else {
-                return "Es incorrecto";
+                return "La letra del dni no coincide con el nif";
             }
         } else {
-            return "Es incorrecto";
+            return "Introduzca dni correcto (Formato: 00000000A, 00000000-A o 00000000 A)";
         }
     }
 }
