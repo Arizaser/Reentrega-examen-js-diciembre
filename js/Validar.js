@@ -44,18 +44,16 @@ let Validar = {
     validarDni: function (dni) {
         const regex = /^([0-9]{8})[- ]?([A-Za-z]{1})$/;
         let letrasDni = "TRWAGMYFPDXBNJZSQVHLCKET";
-        let executable = regex.exec(dni);
-        if (regex.test(dni)) {
-            let numero = executable[1];
-            let letra = (executable[2]).toUpperCase();
-            if (letra == letrasDni[numero % 23]) {
-                return "";
-            } else {
-                return "La letra del dni no coincide con el nif";
-            }
-        } else {
-            return "Introduzca dni correcto (Formato: 00000000A, 00000000-A o 00000000 A)";
-        }
+
+        if (!re.test(dni))
+            return `Formato dni incorrecto`;
+
+        let [fullDni, numeroDni, letraDNI] = re.exec(dni);
+
+        if (letraDNI.toUpperCase() !== letrasDni[numeroDni % 23].toUpperCase())
+            return `El dni ${dniCompleto} no es correcto`;
+
+        return ``;
     }
 }
 
