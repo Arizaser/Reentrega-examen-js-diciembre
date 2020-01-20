@@ -26,32 +26,37 @@ let Validar = {
         }
     },
     validarFecha: function (fecha) {
-        const rx = /^([0-2][0-9]|3[0-1])[/-](0[0-9]|1[0-2])[/-]\d{4}$/;
+        let regex = /^([0-9]{2})([-/])([0-9]{2})\2([0-9]{4})$/;
 
-        if (!rx.test(fecha))
+        if (!regex.test(fecha)) {
             return "Introduzca un formato válido (Formato: dd/mm/aaaa o dd-mm-aaaa)";
-        
-        let [, dia, , mes, anno] = re.exec(fecha);
-        dia = Number(dia);
-        mes = Number(mes);
-        anno = Number(anno);
-        let date = new Date(`${anno}/${mes}/${dia}`);
+        }
 
-        if (date.getFullYear() !== anno && date.getMonth() !== mes - 1 && date.getDate() !== dia)
-            return "La fecha introducida no es correcta.";
-        return "";
+        let [,dia,,mes,agno] = regex.exec(fecha);
+        dia = Number(dia); //Es necesario pasarlo a número para comprobarlo con la fecha creada en Date
+        mes = Number(mes); 
+        agno = Number(agno);
+        let date = new Date(`${agno}/${mes}/${dia}`);
+
+        if(date.getFullYear() === agno && date.getMonth() === mes-1 && date.getDate() === dia){
+            return "";
+        }
+        else{
+            return "La fecha introducida no existe.";
+        }
+        
     },
     validarDni: function (dni) {
         const regex = /^([0-9]{8})[- ]?([A-Za-z]{1})$/;
         let letrasDni = "TRWAGMYFPDXBNJZSQVHLCKET";
 
-        if (!re.test(dni))
+        if (!regex.test(dni))
             return `Formato dni incorrecto`;
 
-        let [fullDni, numeroDni, letraDNI] = re.exec(dni);
+        let [fullDni, numeroDni, letraDNI] = regex.exec(dni);
 
         if (letraDNI.toUpperCase() !== letrasDni[numeroDni % 23].toUpperCase())
-            return `El dni ${dniCompleto} no es correcto`;
+            return `El dni ${fullDni} no tiene la letra correcta.`;
 
         return ``;
     }

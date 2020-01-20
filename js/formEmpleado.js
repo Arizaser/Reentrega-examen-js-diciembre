@@ -46,7 +46,7 @@
             let empleado = new Empleado(inputNombre.value, inputFecha.value, inputDni.value);
             errorCrear.innerHTML = "";
         } else {
-            errorCrear.innerHTML = "No se puede crear el empleado porque hay datos erróneos.";
+            errorCrear.innerHTML = "No se puede crear el empleado. Rellene los elementos del formulario correctamente.";
         }
     }
 
