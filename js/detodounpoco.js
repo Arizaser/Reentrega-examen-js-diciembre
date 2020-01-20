@@ -25,7 +25,6 @@
     let dia;
 
     let init = () => {
-        dia = new Date();
         parrafoInfoDia = document.getElementById("info");
         parrafoInfoHora = document.getElementById("infoHora");
         document.getElementById("informa").addEventListener("click", informa);
@@ -33,6 +32,7 @@
     }
 
     let informa = () => {
+        dia = new Date();
         let hora = dia.getHours();
         let minutos = dia.getMinutes();
         let msg;
