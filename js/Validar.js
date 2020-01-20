@@ -26,11 +26,20 @@ let Validar = {
         }
     },
     validarFecha: function (fecha) {
-        if (/^([0-2][0-9]|3[0-1])[/-](0[0-9]|1[0-2])[/-]\d{4}$/.test(fecha)) {
-            return "";
-        } else {
-            return "Introduzca una fecha válida (Fórmato: dd/mm/aaaa o dd-mm-aaaa)";
-        }
+        const rx = /^([0-2][0-9]|3[0-1])[/-](0[0-9]|1[0-2])[/-]\d{4}$/;
+
+        if (!rx.test(fecha))
+            return "Introduzca un formato válido (Formato: dd/mm/aaaa o dd-mm-aaaa)";
+        
+        let [, dia, , mes, anno] = re.exec(fecha);
+        dia = Number(dia);
+        mes = Number(mes);
+        anno = Number(anno);
+        let date = new Date(`${anno}/${mes}/${dia}`);
+
+        if (date.getFullYear() !== anno && date.getMonth() !== mes - 1 && date.getDate() !== dia)
+            return "La fecha introducida no es correcta.";
+        return "";
     },
     validarDni: function (dni) {
         const regex = /^([0-9]{8})[- ]?([A-Za-z]{1})$/;

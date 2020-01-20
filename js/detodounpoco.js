@@ -33,7 +33,8 @@
     }
 
     let informa = () => {
-        let minutos;
+        let hora = dia.getHours();
+        let minutos = dia.getMinutes();
         let msg;
         switch (dia.getDay()) {
             case 1:
@@ -65,19 +66,21 @@
 
         
         if (dia.getMinutes() <10) {
-            minutos = `0${dia.getMinutes()}`;
-        }else{
-            minutos = `${dia.getMinutes()}`;
+            minutos = `0${minutos}`;
         }
-        
+
+        if(dia.getMinutes() <10){
+            hora = `0${hora}`;
+        }
+
         if (dia.getHours()>18) {
-            parrafoInfoHora.innerHTML = `Son las ${dia.getHours()}:${minutos}. Ya es hora de que dejes de trabajar. Hay que conciliar la vida 
+            parrafoInfoHora.innerHTML = `Son las ${hora}:${minutos}. Ya es hora de que dejes de trabajar. Hay que conciliar la vida 
             laboral con la familiar`;
         } else if(dia.getHours()<8) {
-            parrafoInfoHora.innerHTML = `Son las ${dia.getHours()}:${minutos}. Ya es hora de que comiences a trabajar. Hay que levantar el 
+            parrafoInfoHora.innerHTML = `Son las ${hora}:${minutos}. Ya es hora de que comiences a trabajar. Hay que levantar el 
             país.`;
         }else{
-            parrafoInfoHora.innerHTML = `Son las ${dia.getHours()}:${minutos}. Pronto llegan las vacaciones. Aguanta.`;
+            parrafoInfoHora.innerHTML = `Son las ${hora}:${minutos}. Pronto llegan las vacaciones. Aguanta.`;
         }
        
     }
