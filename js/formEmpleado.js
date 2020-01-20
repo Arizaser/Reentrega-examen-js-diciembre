@@ -45,6 +45,9 @@
         if (cadenaError.length == 0) {
             let empleado = new Empleado(inputNombre.value, inputFecha.value, inputDni.value);
             errorCrear.innerHTML = "";
+            for (const i of document.getElementsByTagName('input')) {
+                i.value = "";
+            }
         } else {
             errorCrear.innerHTML = "No se puede crear el empleado. Rellene los elementos del formulario correctamente.";
         }
